@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 
 import 'package:myproject/OGhome.dart';
@@ -12,183 +6,159 @@ import 'package:myproject/myauction.dart';
 import 'package:myproject/search.dart';
 import 'package:myproject/settings.dart';
 
-
 // ignore: must_be_immutable
 class HomeP extends StatefulWidget {
-    int currentIndex=0;
-   HomeP({super.key,required this.currentIndex});
+  int currentIndex = 0;
+  HomeP({super.key, required this.currentIndex});
 
   @override
   State<HomeP> createState() => _HomePState();
 }
 
 class _HomePState extends State<HomeP> {
-
-  List <Widget> pages =  [
+  List<Widget> pages = [
     Realhome(),
     MyAuction(),
     AddItem(),
     search(),
     settings()
-
-
-
-
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 248, 227),
-
+        backgroundColor: const Color.fromARGB(255, 255, 248, 227),
 
 //
 
-
 /////
 
-          
-
-    
-
-        body:
-      
-        
-         Center(
+        body: Center(
           child: pages[widget.currentIndex],
-          
         ),
-          
-drawer: const Drawer(
-  width: 200,
-        backgroundColor: Color.fromARGB(255, 56, 83, 88),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column( mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 22, top: 33),
-                  child: ListTile(
-                    leading: Icon(Icons.all_out_rounded,color: Color.fromARGB(255, 255, 255, 255),
-                    
+        drawer: const Drawer(
+          width: 200,
+          backgroundColor: Color.fromARGB(255, 56, 83, 88),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 22, top: 33),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.all_out_rounded,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      title: Text(
+                        'Items',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
-                    title: Text('Items',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
-                    
-                
-                
-                
                   ),
-                ),
-                
-                
-                Padding(
-                  padding: EdgeInsets.only(left: 22),
-                  child: ListTile(
-                    leading: Icon(Icons.all_out_rounded,color: Color.fromARGB(255, 255, 255, 255),
-                    
+                  Padding(
+                    padding: EdgeInsets.only(left: 22),
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.all_out_rounded,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      title: Text(
+                        'Services',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
-                    title: Text('Services',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
-                    
-                
-                
-                
                   ),
-                ),
-              ],
-            ),
-            
-            Padding(
-              padding: EdgeInsets.only(left: 22),
-              child: ListTile(
-                leading: Icon(Icons.exit_to_app_rounded,color: Color.fromARGB(255, 255, 255, 255),
-                
-                ),
-                title: Text('Exit', style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
-                
-
-
-
+                ],
               ),
-            ),
-          ],
-        ),
-      ),
-appBar:       AppBar(
-            toolbarHeight: 34,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Builder(builder: (context) {
-              return IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.black,
+              Padding(
+                padding: EdgeInsets.only(left: 22),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.exit_to_app_rounded,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
+                  title: Text(
+                    'Exit',
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
                 ),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              );
-              
-            }),
+              ),
+            ],
           ),
-    bottomNavigationBar:MyBottomNavBar(currentIndex:widget. currentIndex,onTap: (p0) {
-      setState(() {
-    widget.    currentIndex=p0;
-      });
-    },)
-
-    );
+        ),
+        appBar: AppBar(
+          toolbarHeight: 34,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Builder(builder: (context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          }),
+        ),
+        bottomNavigationBar: MyBottomNavBar(
+          currentIndex: widget.currentIndex,
+          onTap: (p0) {
+            setState(() {
+              widget.currentIndex = p0;
+            });
+          },
+        ));
   }
 }
-
 
 // ignore: must_be_immutable
 class MyBottomNavBar extends StatelessWidget {
   int currentIndex;
   void Function(int)? onTap;
-   MyBottomNavBar({super.key,required this.currentIndex,required this.onTap});
+  MyBottomNavBar({super.key, required this.currentIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      showUnselectedLabels: true ,
-      
-      
+      showUnselectedLabels: true,
       unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
       fixedColor: const Color.fromARGB(255, 214, 14, 14),
-      
       currentIndex: currentIndex,
-    onTap: onTap,
-     
-    items: const [BottomNavigationBarItem(
-      backgroundColor: Color.fromARGB(255, 249, 247, 246),
-         
-      label: "home",
-      icon: Icon(Icons.home), ),
-      
-      BottomNavigationBarItem(
-        label: "MyAuction",
-        icon: Icon(Icons.store_mall_directory_rounded),
-      
-        
-        
+      onTap: onTap,
+      items: const [
+        BottomNavigationBarItem(
+          backgroundColor: Color.fromARGB(255, 249, 247, 246),
+          label: "home",
+          icon: Icon(Icons.home),
         ),
         BottomNavigationBarItem(
-
+          label: "MyAuction",
+          icon: Icon(Icons.store_mall_directory_rounded),
+        ),
+        BottomNavigationBarItem(
           label: "add",
-          icon:  Icon(Icons.control_point_duplicate_sharp,size: 33,color: Color.fromARGB(255, 99, 0, 129),weight: 12,),),
-
-
-
-
+          icon: Icon(
+            Icons.control_point_duplicate_sharp,
+            size: 33,
+            color: Color.fromARGB(255, 99, 0, 129),
+            weight: 12,
+          ),
+        ),
         BottomNavigationBarItem(
           label: "search",
-          icon:  Icon(Icons.search_sharp),),
-          BottomNavigationBarItem(
+          icon: Icon(Icons.search_sharp),
+        ),
+        BottomNavigationBarItem(
           label: "settings",
-          icon:  Icon(Icons.settings),),
-      
+          icon: Icon(Icons.settings),
+        ),
       ],
     );
   }
 }
-

@@ -52,12 +52,12 @@ class _LoginState extends State<Login> {
                     builder: (context) => HomeP(currentIndex: 0,),
                   ));
                 },
-                child: Text("Register",style: TextStyle(color: const Color.fromARGB(255, 255, 252, 252)),),
                 style: ButtonStyle(
                   
                   backgroundColor:
                       MaterialStateProperty.all(Color.fromARGB(255, 166, 15, 15)),
                 ),
+                child: Text("Register",style: TextStyle(color: const Color.fromARGB(255, 255, 252, 252)),),
               ),
       Row( mainAxisAlignment: MainAxisAlignment.center,
         children: const [
