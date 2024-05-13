@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:myproject/OGhome.dart';
 import 'package:myproject/additem.dart';
+import 'package:myproject/login.dart';
 import 'package:myproject/myauction.dart';
 import 'package:myproject/search.dart';
 import 'package:myproject/settings.dart';
@@ -20,7 +21,7 @@ class _HomePState extends State<HomeP> {
     Realhome(),
     MyAuction(),
     AddItem(),
-    search(),
+    Search(),
     settings()
   ];
   @override
@@ -35,7 +36,7 @@ class _HomePState extends State<HomeP> {
         body: Center(
           child: pages[widget.currentIndex],
         ),
-        drawer: const Drawer(
+        drawer:  Drawer(
           width: 200,
           backgroundColor: Color.fromARGB(255, 56, 83, 88),
           child: Column(
@@ -81,9 +82,20 @@ class _HomePState extends State<HomeP> {
                     Icons.exit_to_app_rounded,
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
-                  title: Text(
-                    'Exit',
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  title: TextButton(
+                    onPressed:  () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Login(),
+                  ));
+                },
+                    child: Row(
+                      children: [
+                        Text(
+                          'Exit',
+                          style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

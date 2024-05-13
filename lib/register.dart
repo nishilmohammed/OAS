@@ -13,7 +13,7 @@ class _registerState extends State<register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 232, 223, 137),
+      backgroundColor:Color.fromARGB(255, 255, 252, 225),
       body: ListView(
         children: [
           const SizedBox(

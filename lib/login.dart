@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 252, 226, 121),
+      backgroundColor:Color.fromARGB(255, 255, 252, 225),
       body: SafeArea(
         child: Center(
           child: Column(

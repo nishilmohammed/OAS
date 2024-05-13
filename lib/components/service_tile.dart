@@ -1,17 +1,18 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:myproject/models/items.dart';
 
-// class ItemTiles extends StatefulWidget {
-//   final Items items;
-//   ItemTiles({Key? key, required this.items}) : super(key: key);
+// import 'package:flutter/material.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:myproject/models/items.dart';
+
+// class ServiceTile extends StatefulWidget {
+//   final Services services;
+//   ServiceTile({Key? key, required this.services}) : super(key: key);
 
 //   @override
-//   _ItemTilesState createState() => _ItemTilesState();
+//   _ServiceTileState createState() => _ServiceTileState();
 // }
 
-// class _ItemTilesState extends State<ItemTiles> {
+// class _ServiceTileState extends State<ServiceTile> {
 //   int? enteredValue;
 
 //   @override
@@ -28,28 +29,22 @@ import 'package:myproject/models/items.dart';
 //         children: [
 //           AspectRatio(
 //             aspectRatio: 14 / 9,
-//             child: GestureDetector(
-//               onTap: () => Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                   builder: (context) => IndivItem(
-//                     items: widget.items,
-//                   ),
-//                 ),
-//               ),
-//               child: Image.asset(widget.items.imagepath, fit: BoxFit.contain),
+//             child: Image.asset(
+//               widget.services.imagepath,
+//               fit: BoxFit.contain,
 //             ),
 //           ),
-//           Text(widget.items.name, style: const TextStyle(fontSize: 22)),
-//           Text(widget.items.description),
-//           Text(widget.items.expiry),
+//           Text(widget.services.name, style: const TextStyle(fontSize: 22)),
+//           Text(widget.services.description),
+//           Text(widget.services.expiry),
 //           Row(
 //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //             children: [
 //               Column(
 //                 children: [
-//                   Text(widget.items.basebid),
-//                   if (enteredValue != null) Text('Highest Bid: $enteredValue'),
+//                   Text(widget.services.budget),
+//                   if (enteredValue != null)
+//                     Text('Highest Bid: $enteredValue'),
 //                 ],
 //               ),
 //               GestureDetector(
@@ -65,9 +60,16 @@ import 'package:myproject/models/items.dart';
 //                       bottomRight: Radius.circular(12),
 //                     ),
 //                   ),
-//                   child: Text(
-//                     'Bid',
-//                     style: TextStyle(color: Colors.white),
+//                   child: const Column(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       Icon(
+//                         FontAwesomeIcons.hammer,
+//                         color: Colors.white,
+//                       ),
+                      
+                    
+//                     ],
 //                   ),
 //                 ),
 //               ),
@@ -82,13 +84,13 @@ import 'package:myproject/models/items.dart';
 //     int? userInput = await showDialog<int>(
 //       context: context,
 //       builder: (BuildContext context) {
-//         TextEditingController controller = TextEditingController();
+//         TextEditingController _controller = TextEditingController();
 
 //         return AlertDialog(
-//           title: const Text('Enter Value'),
+//           title: Text('Enter Value'),
 //           content: TextField(
-//             controller: controller,
-//             decoration: const InputDecoration(hintText: 'Enter your bid'),
+//             controller: _controller,
+//             decoration: InputDecoration(hintText: 'Enter an integer value'),
 //             keyboardType: TextInputType.number,
 //           ),
 //           actions: [
@@ -96,21 +98,21 @@ import 'package:myproject/models/items.dart';
 //               onPressed: () {
 //                 Navigator.pop(context);
 //               },
-//               child: const Text('Cancel'),
+//               child: Text('Cancel'),
 //             ),
 //             TextButton(
 //               onPressed: () {
-//                 int? value = int.tryParse(controller.text);
+//                 int? value = int.tryParse(_controller.text);
 //                 if (value != null) {
 //                   setState(() {
 //                     enteredValue = value;
 //                   });
-//                   Navigator.pop(context);
+//                   Navigator.pop(context, value);
 //                 } else {
 //                   // Show error or handle invalid input
 //                 }
 //               },
-//               child: const Text('Bid'),
+//               child: Text('OK'),
 //             ),
 //           ],
 //         );
@@ -123,101 +125,109 @@ import 'package:myproject/models/items.dart';
 //     }
 //   }
 // }
-//-------------------------------------------------------
+
+
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:myproject/models/items.dart';
-import 'package:myproject/models/itemcart.dart'; // Import the Cart class
 
-class ItemTiles extends StatefulWidget {
-  final Items items;
-  ItemTiles({Key? key, required this.items}) : super(key: key);
+import 'package:myproject/models/items.dart';
+
+class ServiceTile extends StatefulWidget {
+  final Services services;
+  ServiceTile({Key? key, required this.services}) : super(key: key);
 
   @override
-  _ItemTilesState createState() => _ItemTilesState();
+  _ServiceTileState createState() => _ServiceTileState();
 }
 
-class _ItemTilesState extends State<ItemTiles> {
+class _ServiceTileState extends State<ServiceTile> {
   int? enteredValue;
 
   @override
   Widget build(BuildContext context) {
-    var cart = Provider.of<Cart>(context); // Access the Cart object
-
-    return Container(
-      margin: const EdgeInsets.only(left: 23),
-      width: 200,
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AspectRatio(
-            aspectRatio: 14 / 9,
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => IndivItem(
-                    items: widget.items,
-                  ),
-                ),
-              ),
-              child: Image.asset(widget.items.imagepath, fit: BoxFit.contain),
-            ),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => IndivService(
+            services: widget.services,
           ),
-          Text(widget.items.name, style: const TextStyle(fontSize: 22)),
-          Text(widget.items.description),
-          Text(widget.items.expiry),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Text(widget.items.basebid),
-                  if (enteredValue != null) Text('Highest Bid: $enteredValue'),
-                ],
+        ),
+      ),
+      child: Container(
+        margin: const EdgeInsets.only(left: 23),
+        width: 200,
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AspectRatio(
+              aspectRatio: 14 / 9,
+              child: Image.asset(
+                widget.services.imagepath,
+                fit: BoxFit.contain,
               ),
-              GestureDetector(
-                onTap: () {
-                  _showInputDialog(context, cart); // Pass the cart object to the dialog
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
+            ),
+            Text(widget.services.name, style: const TextStyle(fontSize: 22)),
+            Text(widget.services.description),
+            Text(widget.services.expiry),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(widget.services.budget),
+                    if (enteredValue != null)
+                      Text('Highest Bid: $enteredValue'),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _showInputDialog(context);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                    ),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      
+                        Text(
+                          'Bid',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Text(
-                    'Bid',
-                    style: TextStyle(color: Colors.white),
-                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Future<void> _showInputDialog(BuildContext context, Cart cart) async {
+  Future<void> _showInputDialog(BuildContext context) async {
     int? userInput = await showDialog<int>(
       context: context,
       builder: (BuildContext context) {
-        TextEditingController controller = TextEditingController();
+        TextEditingController _controller = TextEditingController();
 
         return AlertDialog(
-          title: const Text('Enter Value'),
+          title: Text('Enter Value'),
           content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(hintText: 'Enter your bid'),
+            controller: _controller,
+            decoration: InputDecoration(hintText: 'Enter an integer value'),
             keyboardType: TextInputType.number,
           ),
           actions: [
@@ -225,23 +235,21 @@ class _ItemTilesState extends State<ItemTiles> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Cancel'),
+              child: Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                int? value = int.tryParse(controller.text);
+                int? value = int.tryParse(_controller.text);
                 if (value != null) {
                   setState(() {
                     enteredValue = value;
                   });
-                  // Add item to cart here
-                  cart.addItemToCart(widget.items);
-                  Navigator.pop(context);
+                  Navigator.pop(context, value);
                 } else {
                   // Show error or handle invalid input
                 }
               },
-              child: const Text('Bid'),
+              child: Text('OK'),
             ),
           ],
         );
@@ -251,24 +259,23 @@ class _ItemTilesState extends State<ItemTiles> {
     if (userInput != null) {
       // Handle the user input here, such as updating state or performing arithmetic operations
       print('User entered: $userInput');
-      widget.items.maxbid=userInput;
     }
   }
 }
 
+class IndivService extends StatelessWidget {
+  final Services services;
 
-class IndivItem extends StatelessWidget {
-  final Items items;
-
-  IndivItem({
-    required this.items,
+  IndivService({
+    required this.services,
   });
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(items.name),
+        title: Text(services.name),
         elevation: 0,
         actions: [
           IconButton(
@@ -288,27 +295,28 @@ class IndivItem extends StatelessWidget {
                   height: 400,
                   width: 411,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(333)),
-                  child: Image.asset(items.imagepath),
+                  child: Image.asset(services.imagepath),
                 ),
                 SizedBox(height: 20),
                 Text(
-                  items.name,
+                  services.name,
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),
                 Text(
-                  items.description,
+                  services.description,
                   style: TextStyle(fontSize: 16),
                 ),
+                SizedBox(height: 20),
+              
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () => _showInputDialog(context),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    
                     children: [
-                      Container(
-                        height: 44,width: 107,
+                      
+                      Container(height: 44,width: 107,
                         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                         decoration: BoxDecoration(
                           color: Colors.black,
@@ -336,13 +344,13 @@ class IndivItem extends StatelessWidget {
     int? userInput = await showDialog<int>(
       context: context,
       builder: (BuildContext context) {
-        TextEditingController controller = TextEditingController();
+        TextEditingController _controller = TextEditingController();
 
         return AlertDialog(
-          title: const Text('Enter Value'),
+          title: Text('Enter Value'),
           content: TextField(
-            controller: controller,
-            decoration: const InputDecoration(hintText: 'Enter your bid'),
+            controller: _controller,
+            decoration: InputDecoration(hintText: 'Enter an integer value'),
             keyboardType: TextInputType.number,
           ),
           actions: [
@@ -350,18 +358,18 @@ class IndivItem extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Cancel'),
+              child: Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                int? value = int.tryParse(controller.text);
+                int? value = int.tryParse(_controller.text);
                 if (value != null) {
                   Navigator.pop(context);
                 } else {
-                //  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please enter number')));
+                  // Show error or handle invalid input
                 }
               },
-              child: const Text('Bid'),
+              child: Text('OK'),
             ),
           ],
         );

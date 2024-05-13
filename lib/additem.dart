@@ -21,7 +21,7 @@ class _AddItemState extends State<AddItem> {
             height: 62,
           ),
           const Text(
-            'Posting an Listing? Select one from below!',
+            'Posting an Listing? Select one from below!',                         
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 23),
           ),

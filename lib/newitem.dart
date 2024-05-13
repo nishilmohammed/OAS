@@ -50,7 +50,9 @@ class __NewItemState extends State<NewItem> {
                       .toList(),
                 ),
                 MyTextField(hintText: 'Title', obscureText: false),
-                MyTextField(hintText: 'Description', obscureText: false),
+                MyTextField(hintText: 'Summary', obscureText: false),
+                MyTextField(hintText: 'Detailed Description', obscureText: false),
+                MyTextField(hintText: 'Category', obscureText: false),
                 MyTextField(hintText: 'Base Amount', obscureText: false),
                 MyTextField(hintText: 'Duration', obscureText: false),
 
